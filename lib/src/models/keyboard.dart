@@ -5,12 +5,26 @@ import 'package:virtual_keyboard/src/utils/bitmask_converter/keystroke_aspects_b
 import 'package:virtual_keyboard/virtual_keyboard.dart';
 import 'package:win32/win32.dart';
 
+/// Use ```Keyboard``` to simulate keystrokes.
+/// Example:
+/// ```dart
+/// Keyboard keyboard = Keyboard();
+/// mainKeyboard.press(KeyboardKey.H);
+/// mainKeyboard.press(KeyboardKey.E);
+/// mainKeyboard.press(KeyboardKey.L);
+/// mainKeyboard.press(KeyboardKey.L);
+/// mainKeyboard.press(KeyboardKey.O);
+/// ```
+/// 
+/// Use ```enable``` property to enable/disable the keyboard,
+/// that way, the keyboard cant press any key.
 class Keyboard {
   bool enabled;
 
   Keyboard({this.enabled = true});
 
   ///Simualte a keystroke.
+  ///
   ///```keyInput``` - Key to be pressed.
   void press(KeyboardKey keyInput) {
     if (!enabled) return;
@@ -29,6 +43,7 @@ class Keyboard {
   }
 
   ///Simulate a keystroke a few times.
+  ///
   ///```keyInput``` - Key to be pressed.
   ///```pressTimes``` - Times to press the key.
   void pressTimes(KeyboardKey keyInput, int pressTimes) {
@@ -50,8 +65,9 @@ class Keyboard {
   }
 
   ///Simualte a keystroke and hold the key until the duration ends.
+  ///
   ///```keyInput``` - Key to be pressed.
-  ///```duration``` - Define a duration to press and hold.
+  ///```duration``` - Define a duration to until release.
   Future pressAndHold(KeyboardKey keyInput, Duration duration) async {
     if (!enabled) return;
 

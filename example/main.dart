@@ -6,7 +6,8 @@ void main() async {
   mainKeyboard.press(KeyboardKey.E);
   mainKeyboard.press(KeyboardKey.Y);
   mainKeyboard.press(KeyboardKey.B);
-  mainKeyboard.press(KeyboardKey.O);
+  await mainKeyboard.pressAndHold(
+      KeyboardKey.O, const Duration(milliseconds: 30));
   mainKeyboard.press(KeyboardKey.A);
   mainKeyboard.press(KeyboardKey.R);
   mainKeyboard.press(KeyboardKey.D);
