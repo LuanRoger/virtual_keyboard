@@ -2,13 +2,14 @@ name: virtual_keyboard
 description: Simulate keystrokes with Win32 API.
 platforms:
   windows:
-version: 1.0.0
+version: 1.0.1
+publish_to: none
 
 environment:
   sdk: '>=2.17.6 <3.0.0'
 
 dependencies:
-  win32: ^2.7.0
+  win32: ^3.0.0
   ffi: ^2.0.1
 
 dev_dependencies:
