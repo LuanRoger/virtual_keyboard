@@ -15,7 +15,7 @@ import 'package:win32/win32.dart';
 /// mainKeyboard.press(KeyboardKey.L);
 /// mainKeyboard.press(KeyboardKey.O);
 /// ```
-/// 
+///
 /// Use ```enable``` property to enable/disable the keyboard,
 /// that way, the keyboard cant press any key.
 class Keyboard {
@@ -68,7 +68,7 @@ class Keyboard {
   ///
   ///```keyInput``` - Key to be pressed.
   ///```duration``` - Define a duration to until release.
-  Future pressAndHold(KeyboardKey keyInput, Duration duration) async {
+  Future<void> pressAndHold(KeyboardKey keyInput, Duration duration) async {
     if (!enabled) return;
 
     KeyboardInput input = KeyboardInput();
@@ -91,6 +91,18 @@ class Keyboard {
     });
 
     _releaseButton(input);
+  }
+
+  Future<void> pressSequence(List<KeyboardKey> sequence,
+      {Duration? pressHoldDuration}) {
+    if (!enabled) return Future.value();
+    final pressDuration = pressHoldDuration ?? Duration(microseconds: 500);
+
+    final Iterable<Future<void>> pressingSequence = sequence.map(
+      (key) => pressAndHold(key, pressDuration),
+    );
+
+    return Future.wait(pressingSequence);
   }
 
   ///Release all holding buttons.
